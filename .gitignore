@@ -3,3 +3,14 @@ __pycache__/
 *.pyc
 weather_data.db
 *.db
+
+# Ignore SQLite DB
+*.db
+
+# Ignore generated charts and reports
+*.png
+*.xlsx
+
+# Ignore __pycache__
+__pycache__/
+*.pyc
