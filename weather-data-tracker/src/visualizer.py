@@ -1,8 +1,9 @@
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 DB_NAME = "weather_data.db"
 CHART_DIR = "charts"
@@ -31,6 +32,16 @@ def plot_temperature_trend(city):
     plt.xlabel("Time")
     plt.ylabel("Temperature (°C)")
     plt.grid(True)
+
+    # Set tight time range around data
+    min_time = df['timestamp'].min() - timedelta(hours=12)
+    max_time = df['timestamp'].max() + timedelta(hours=12)
+    plt.xlim(min_time, max_time)
+
+    # Format X-axis dates
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d\n%H:%M'))
+    plt.gcf().autofmt_xdate()
+
     plt.tight_layout()
 
     filename = os.path.join(CHART_DIR, f"temp_trend_{city.lower()}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.png")

@@ -20,7 +20,7 @@ def print_analysis():
 
 if __name__ == "__main__":
     init_db()
-    action = input("Choose: [1] Fetch & Save Weather  [2] Analyze Stored Data  [3] Export Excel Report: ").strip()
+    action = input("Choose: [1] Fetch & Save Weather  [2] Analyze Stored Data  [3] Export Excel Report  [4] Clean Data  [5] Visualize Data: ").strip()
 
     if action == "1":
         city = input("Enter city name (leave blank for default): ").strip() or None
@@ -39,10 +39,13 @@ if __name__ == "__main__":
     elif action == "4":
         clean_weather_data()
 
-elif action == "5":
-    sub = input("Visualize: [1] Trend by City  [2] Avg Temp by City: ").strip()
-    if sub == "1":
-        city = input("Enter city name: ").strip()
-        plot_temperature_trend(city)
-    elif sub == "2":
-        plot_avg_temp_by_city()
+    elif action == "5":
+        sub = input("Visualize: [1] Trend by City  [2] Avg Temp by City: ").strip()
+        if sub == "1":
+            city = input("Enter city name: ").strip()
+            plot_temperature_trend(city)
+        elif sub == "2":
+            plot_avg_temp_by_city()
+
+
+
