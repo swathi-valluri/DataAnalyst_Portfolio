@@ -37,13 +37,13 @@ if __name__ == "__main__":
         export_weather_to_excel()
 
     elif action == "4":
-    clean_weather_data()
+        clean_weather_data()
 
     elif action == "5":
-    sub = input("Visualize: [1] Trend by City  [2] Avg Temp by City: ").strip()
-    if sub == "1":
-        city = input("Enter city name: ").strip()
-        plot_temperature_trend(city)
+        sub = input("Visualize: [1] Trend by City  [2] Avg Temp by City: ").strip()
+        if sub == "1":
+          city = input("Enter city name: ").strip()
+          plot_temperature_trend(city)
     elif sub == "2":
         plot_avg_temp_by_city()
         
