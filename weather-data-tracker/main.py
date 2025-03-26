@@ -3,6 +3,7 @@ from src.database import init_db, save_weather
 from src.analyzer import average_temperature_by_city, city_temp_rank, compare_current_to_previous
 from src.reporter import export_weather_to_excel
 from src.cleaner import clean_weather_data
+from src.visualizer import plot_temperature_trend, plot_avg_temp_by_city
 
 def print_analysis():
     print("\nAverage Temperature by City:")
@@ -37,3 +38,12 @@ if __name__ == "__main__":
 
     elif action == "4":
     clean_weather_data()
+
+    elif action == "5":
+    sub = input("Visualize: [1] Trend by City  [2] Avg Temp by City: ").strip()
+    if sub == "1":
+        city = input("Enter city name: ").strip()
+        plot_temperature_trend(city)
+    elif sub == "2":
+        plot_avg_temp_by_city()
+        
