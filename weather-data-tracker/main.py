@@ -2,6 +2,7 @@ from src.fetcher import fetch_weather
 from src.database import init_db, save_weather
 from src.analyzer import average_temperature_by_city, city_temp_rank, compare_current_to_previous
 from src.reporter import export_weather_to_excel
+from src.cleaner import clean_weather_data
 
 def print_analysis():
     print("\nAverage Temperature by City:")
@@ -33,3 +34,6 @@ if __name__ == "__main__":
 
     elif action == "3":
         export_weather_to_excel()
+
+    elif action == "4":
+    clean_weather_data()
