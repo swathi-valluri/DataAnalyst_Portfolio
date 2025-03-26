@@ -1,12 +1,18 @@
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
+from datetime import datetime
 
 DB_NAME = "weather_data.db"
+CHART_DIR = "charts"
+
+# Ensure charts directory exists
+os.makedirs(CHART_DIR, exist_ok=True)
 
 def plot_temperature_trend(city):
     with sqlite3.connect(DB_NAME) as conn:
-        df = pd.read_sql_query(f"""
+        df = pd.read_sql_query("""
             SELECT timestamp, temperature
             FROM weather_cleaned
             WHERE city = ?
@@ -26,7 +32,11 @@ def plot_temperature_trend(city):
     plt.ylabel("Temperature (°C)")
     plt.grid(True)
     plt.tight_layout()
-    plt.show()
+
+    filename = os.path.join(CHART_DIR, f"temp_trend_{city.lower()}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.png")
+    plt.savefig(filename)
+    print(f"✅ Temperature trend saved to {filename}")
+
 
 def plot_avg_temp_by_city():
     with sqlite3.connect(DB_NAME) as conn:
@@ -48,4 +58,7 @@ def plot_avg_temp_by_city():
     plt.ylabel("Avg Temperature (°C)")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.show()
+
+    filename = os.path.join(CHART_DIR, f"avg_temp_by_city_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.png")
+    plt.savefig(filename)
+    print(f"✅ Average temperature chart saved to {filename}")
