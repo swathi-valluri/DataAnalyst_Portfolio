@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "weather-data-tracker"
+version = "0.1.0"
+description = "A CLI tool to fetch, store, and export weather data using OpenWeatherMap API"
+authors = ["Swathi Valluri <swathi.valluri@outlook.com>"]
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+python-dotenv = "^1.0.0"
+pandas = "^2.2.1"
+openpyxl = "^3.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
