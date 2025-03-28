@@ -9,3 +9,4 @@ load_dotenv()
 # Access config values
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 DEFAULT_CITY = os.getenv("DEFAULT_CITY", "London")
+print(f"🔑 Loaded API KEY: {API_KEY}")
