@@ -1,34 +1,34 @@
+import argparse
 from src.fetcher import fetch_forecast
 from src.database import save_forecast_data
 from src.reporter import export_weather_to_excel
 
 def main():
-    city_input = input("Enter city name (leave blank for default): ").strip()
-    city = city_input if city_input else None
+    parser = argparse.ArgumentParser(description="Weather Forecast Tracker")
+    parser.add_argument("cities", nargs="+", help="List of city names to fetch weather for")
+    args = parser.parse_args()
 
-    forecasts = fetch_forecast(city)
+    cities = args.cities
+    all_forecasts = []
 
-    if forecasts:
-        print(f"\n✅ Retrieved {len(forecasts)} forecast records for {forecasts[0]['city']}")
-        
-        # Show a sample (optional)
-        sample = forecasts[0]
-        print(f"\n📅 Timestamp: {sample['timestamp']}")
-        print(f"🌡️ Temperature: {sample['temp']} °C")
-        print(f"💧 Humidity: {sample['humidity']}%")
-        print(f"🌥️ Weather: {sample['weather_main']} - {sample['weather_desc']}")
-        
-        # Save all records to DB
-        save_forecast_data(forecasts)
-        print("💾 Forecast data saved to database.")
+    for city in cities:
+        print(f"\n🌍 Fetching forecast for: {city}")
+        forecasts = fetch_forecast(city)
 
-        # Ask to export to Excel
-        export_choice = input("\n📤 Export data to Excel? (y/n): ").strip().lower()
+        if forecasts:
+            print(f"✅ {len(forecasts)} entries fetched for {city}")
+            save_forecast_data(forecasts)
+            all_forecasts.extend(forecasts)
+        else:
+            print(f"⚠️ Failed to fetch data for {city}")
+
+    if all_forecasts:
+        print(f"\n💾 Saved forecast data for {len(cities)} cities.")
+        export_choice = input("\n📤 Export combined data to Excel? (y/n): ").strip().lower()
         if export_choice == "y":
             export_weather_to_excel()
-
     else:
-        print("⚠️ Failed to fetch forecast data.")
+        print("⚠️ No data fetched — nothing to export.")
 
 if __name__ == "__main__":
     main()
