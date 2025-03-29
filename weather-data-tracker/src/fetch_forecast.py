@@ -28,7 +28,7 @@ def fetch_forecast(city):
         for entry in forecasts:
             weather = entry["weather"][0] if entry["weather"] else {}
             parsed.append({
-                ""city": city,  
+                "city": city,  
                 "country": city_info.get("country"),
                 "latitude": lat,
                 "longitude": lon,
