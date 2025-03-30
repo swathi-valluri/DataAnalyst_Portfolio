@@ -3,7 +3,7 @@ name: 🌦️ Update Weather Reports
 on:
   schedule:
     - cron: '0 */6 * * *'  # Every 6 hours
-  workflow_dispatch:        # Allow manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   update-weather:
@@ -18,24 +18,27 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: 🧪 Install dependencies
+      - name: 🧪 Install Poetry & dependencies
         run: |
-          pip install -r requirements.txt
+          pip install poetry
+          cd weather-data-tracker
+          poetry install
 
       - name: ⚙️ Run data fetch
         env:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         run: |
-          python main.py --type all <<< "London,New York,Tokyo"
+          cd weather-data-tracker
+          poetry run python ../main.py --type all <<< "London,New York,Tokyo"
 
-      - name: 📤 Copy latest reports
+      - name: 📤 Copy reports to live_weather
         run: |
-          mkdir -p live_weather
-          cp -r exports/*.xlsx live_weather/ || echo "No Excel files"
-          cp -r charts/*.png live_weather/ || echo "No chart images"
+          mkdir -p weather-data-tracker/live_weather
+          cp -r weather-data-tracker/exports/*.xlsx weather-data-tracker/live_weather/ || echo "No Excel files"
+          cp -r weather-data-tracker/charts/*.png weather-data-tracker/live_weather/ || echo "No chart images"
 
       - name: 🟢 Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./live_weather
+          publish_dir: weather-data-tracker/live_weather
