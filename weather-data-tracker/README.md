@@ -3,11 +3,18 @@
 This project allows you to fetch, export, and visualize weather data (current, forecast, and pollution) for multiple cities using the **OpenWeatherMap API**.
 
 Built for data analysis, this tool helps you:
-- Fetch clean weather data
-- Export it to Excel
-- Auto-generate per-city weather charts
 
----
+✅ Fetch clean weather data
+✅ Export it to Excel
+✅ Auto-generate per-city weather charts
+✅ See it all live on the web (auto-updated!)
+
+Automated with GitHub Actions & Published via GitHub Pages
+
+ Live Dashboard
+🌐 Click here to see the dashboard
+🕓 Updates every 6 hours with the latest data
+
 
 ## 📦 Features
 
@@ -125,16 +132,22 @@ python test/test_pollution.py
 
 ---
 
-## 🧠 Future Ideas (Optional Add-ons)
+🤖 Automation
+This project uses a little robot (GitHub Actions) that:
+⏰ Runs every 6 hours
+📡 Fetches updated weather
+🖼️ Regenerates charts
+🌍 Publishes to GitHub Pages
 
-| Feature | Tool | Benefit |
-|--------|------|---------|
-| Dashboard UI | Streamlit | Interactive web display |
-| Chart to PDF | `reportlab`, `fpdf` | Shareable reports |
-| SQLite Logger | `sqlite3`, `sqlalchemy` | Store daily logs for historical tracking |
-| Interactive Charts | `plotly`, `altair` | Zoom, hover, tooltips |
+You can view it here: Live Weather Dashboard
 
 ---
+
+🔐 Secrets
+
+To use the weather API, a secret token (OPENWEATHER_API_KEY) must be saved in GitHub Actions Secrets.
+
+
 
 ## 📝 License
 
