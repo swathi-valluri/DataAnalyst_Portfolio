@@ -1,0 +1,42 @@
+name: 🌦️ Update Weather Reports
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Runs every 6 hours
+  workflow_dispatch:       # Allow manual trigger from GitHub UI
+
+jobs:
+  update-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: 🧪 Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+
+      - name: ⚙️ Run data fetch
+        env:
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        run: |
+          poetry run python main.py --type all <<< "London,New York,Tokyo"
+
+      - name: 📤 Copy latest reports
+        run: |
+          mkdir -p live_weather
+          cp -r exports/*.xlsx live_weather/
+          cp -r charts/*.png live_weather/
+
+      - name: 🟢 Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./live_weather
