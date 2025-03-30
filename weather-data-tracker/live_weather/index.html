@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌦️ Weather Data Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      color: #2a7ae2;
+    }
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .chart {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .chart img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    .downloads {
+      margin-top: 2rem;
+    }
+    .downloads a {
+      display: inline-block;
+      margin-right: 1rem;
+      padding: 0.5rem 1rem;
+      background: #2a7ae2;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Live Weather Dashboard</h1>
+  <p>Last updated automatically via GitHub Actions.</p>
+
+  <div class="charts">
+    <div class="chart">
+      <h3>📈 Temperature Forecast</h3>
+      <img src="temperature_forecast.png" alt="Temperature Forecast">
+    </div>
+    <div class="chart">
+      <h3>💧 Humidity Forecast</h3>
+      <img src="humidity_forecast.png" alt="Humidity Forecast">
+    </div>
+    <!-- Add more charts if available -->
+  </div>
+
+  <div class="downloads">
+    <h2>📥 Download Reports</h2>
+    <a href="weather_data.xlsx" download>Excel Report</a>
+    <!-- Add more links for additional files if needed -->
+  </div>
+
+</body>
+</html>
