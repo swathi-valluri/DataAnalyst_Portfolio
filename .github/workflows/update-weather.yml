@@ -27,7 +27,7 @@ jobs:
         env:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         run: |
-          poetry run python main.py --type all <<< "London,New York,Tokyo"
+          poetry run python weather-data-tracker/main.py --type all <<< "London,New York,Tokyo"
 
       - name: 📤 Copy latest reports
         run: |
