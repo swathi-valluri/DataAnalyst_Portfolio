@@ -1,116 +1,143 @@
-# 🌦 Weather Data Tracker using OpenWeatherMap API
+# 📘 Weather Data Tracker
 
-## 📌 Project Overview
-The **Weather Data Tracker** is a modular Python project designed to:
+This project allows you to fetch, export, and visualize weather data (current, forecast, and pollution) for multiple cities using the **OpenWeatherMap API**.
 
-- Fetch **current weather**, **5-day forecasts**, and **air pollution** data from the OpenWeatherMap API
-- Store and export structured datasets to Excel files
-- Support multiple cities dynamically via CLI
-- Provide data in formats suitable for Excel/Tableau analysis
-
-All modules are organized under `src/` and can be extended independently.
+Built for data analysis, this tool helps you:
+- Fetch clean weather data
+- Export it to Excel
+- Auto-generate per-city weather charts
 
 ---
 
-## ✅ Features Implemented
+## 📦 Features
 
-- 🔑 API key loading from `.env`
-- 📍 City-to-coordinate geocoding (OpenWeatherMap Geo API)
-- 📅 Fetching:
-  - **Current Weather** (`/data/2.5/weather`)
-  - **5-Day Forecasts** (`/data/2.5/forecast`)
-  - **Air Pollution** (`/data/2.5/air_pollution`)
-- 📄 Structured Excel export for each type of data
-- 🧠 CLI-based city input: `python test_current.py London "New York"`
-- 📊 Optional: Fill missing `rain_3h`, `snow_3h` values with `0`
+✅ Fetch **Current Weather**  
+✅ Fetch **5-Day Weather Forecast**  
+✅ Fetch **Air Pollution Data (AQI & PM2.5)**  
+✅ Export all data to a single **Excel workbook**  
+✅ Auto-generate **static PNG charts per city**  
+✅ Accept multiple city inputs via CLI  
+✅ Modular fetcher, visualizer, and reporter structure
 
 ---
 
-## 🏠 Project Structure
+## 📁 Project Structure
+
 ```
 weather-data-tracker/
-├── main.py                     # (Optional CLI runner)
-├── .env.sample                 # Sample config with API key
-├── pyproject.toml              # Poetry config file
-├── exports/                    # All Excel output files
-├── weather_data.db             # (Optional) SQLite DB
-├── test_current.py             # Test script for current weather
-├── test_forecast.py            # Test script for forecast
-├── test_pollution.py           # Test script for pollution
+├── charts/                     # 📊 Generated charts (1 PNG per city)
+├── exports/                    # 📄 Excel files containing weather data
 ├── src/
-│   ├── config.py               # Loads environment/API key
-│   ├── geocode.py              # Converts city name → lat/lon
-│   ├── fetch_current.py        # Fetches current weather
-│   ├── fetch_forecast.py       # Fetches 5-day forecast
-│   ├── fetch_pollution.py      # Fetches air pollution data
-│   ├── reporter.py             # Excel export logic
+│   ├── fetch_current.py        # API call for current weather
+│   ├── fetch_forecast.py       # API call for 5-day forecast
+│   ├── fetch_pollution.py      # API call for pollution (AQI)
+│   ├── geocode.py              # Fetch latitude/longitude
+│   ├── visualizer.py           # Chart generation logic
+│   ├── config.py               # API key + environment loader
+│   ├── database.py             # (Optional) For future database integration
+│   └── reporter.py             # Excel file writer
+├── test/                       # Unit tests for each module
+│   ├── test_current.py
+│   ├── test_forecast.py
+│   └── test_pollution.py
+├── main.py                     # 🔁 CLI to fetch + export + visualize
+├── pyproject.toml              # Poetry project file
+├── .env                        # API key storage
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## 🔧 Setup Instructions
 
-### 1. Clone and Install
+### 1️⃣ Install Poetry & Dependencies
+
 ```bash
-git clone https://github.com/your-username/weather-data-tracker.git
-cd weather-data-tracker
 poetry install
 ```
 
-### 2. Configure API Key
-Create a `.env` file:
-```
-OPENWEATHER_API_KEY=your_real_api_key
-DEFAULT_CITY=London
+### 2️⃣ Create `.env` File
+
+```env
+API_KEY=your_openweathermap_api_key_here
 ```
 
-### 3. Run Modules Individually
+---
+
+## 🚀 How to Use
+
+### ▶️ Run from terminal (Poetry shell)
+
 ```bash
-# Current weather:
-python test_current.py London "New York"
+poetry shell
+python main.py --type all
+```
 
-# 5-day forecast:
-python test_forecast.py London Tokyo
+It will prompt:
 
-# Air pollution:
-python test_pollution.py Mumbai "San Francisco"
+```bash
+🌍 Enter city names separated by comma:
+> london, new york, tokyo
+```
+
+### What It Does:
+- Fetches current, forecast, and pollution data
+- Saves Excel file to: `exports/weather_data_combined_<timestamp>.xlsx`
+- Generates charts per city and saves to: `charts/`
+
+---
+
+## 📊 Output Samples
+
+### Excel:
+- Sheet 1: **Current Weather**
+- Sheet 2: **Forecast**
+- Sheet 3: **Pollution**
+
+### Charts:
+- Temp + Humidity over 5 days
+- Rain + Snow bar plot
+- AQI + PM2.5 bar chart
+
+Each chart saved as:
+```
+charts/london_weather_chart.png
+charts/new_york_weather_chart.png
+...
 ```
 
 ---
 
-## 🔄 Data Collected
+## 🧪 Run Tests
 
-### Current Weather
-- Temp, feels_like, pressure, humidity
-- Weather main/description
-- Wind, cloudiness, sunrise/sunset
-
-### Forecast (5 days / 3-hour)
-- 40 datapoints per city
-- Temp, humidity, rain/snow 3h, weather, etc.
-
-### Air Pollution
-- AQI (1–5), PM2.5, PM10, CO, O3, NO2, SO2, NH3
+```bash
+python test/test_current.py
+python test/test_forecast.py
+python test/test_pollution.py
+```
 
 ---
 
-## 📊 Recommended Use Cases
-- Build dashboards in Excel or Tableau
-- Analyze weather trends and patterns
-- Compare pollution across cities
-- Automate daily/weekly data pulls for time-series analysis
+## 📌 Requirements
+
+- Python 3.9+
+- OpenWeatherMap Free API Key
+- Dependencies managed by Poetry
 
 ---
 
-## 📁 Sample Cities (You Can Use Any)
-- London, New York, Tokyo, Mumbai, Sydney, Dubai, Moscow, Cape Town, Toronto, São Paulo
+## 🧠 Future Ideas (Optional Add-ons)
+
+| Feature | Tool | Benefit |
+|--------|------|---------|
+| Dashboard UI | Streamlit | Interactive web display |
+| Chart to PDF | `reportlab`, `fpdf` | Shareable reports |
+| SQLite Logger | `sqlite3`, `sqlalchemy` | Store daily logs for historical tracking |
+| Interactive Charts | `plotly`, `altair` | Zoom, hover, tooltips |
 
 ---
 
-## 📋 License
-MIT License
+## 📝 License
+
+This project is licensed under the MIT License.
 
 ---
-
-_Weather data provided by [OpenWeatherMap](https://openweathermap.org/api)_
-
