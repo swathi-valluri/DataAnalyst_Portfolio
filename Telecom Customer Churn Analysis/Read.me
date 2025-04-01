@@ -1,0 +1,81 @@
+# Telecom Customer Churn Analysis
+
+## 📅 Case Study Overview
+This project analyzes customer churn behavior in a fictional telecommunications company using SQL and Tableau. Customer churn refers to the phenomenon of customers discontinuing their service over time. The business objective is to understand which customer segments are most likely to churn and what factors contribute to their decision to leave.
+
+The analysis uses a structured dataset containing customer demographics, account information, service usage, and churn indicators. This insight can help the business improve retention strategies and reduce revenue loss.
+
+## 🔹 Problem Statement
+The telecom company has observed a significant number of customers discontinuing services. It wants to:
+
+- Identify which customers are churning.
+- Analyze churn trends by demographic and service categories.
+- Understand behavioral patterns leading to churn.
+- Visualize actionable insights for strategic decision-making.
+
+## 🔸 Objective
+To use SQL for data exploration and Tableau for interactive dashboards that:
+- Calculate churn rates across customer segments.
+- Identify risk indicators such as contract type, tenure, and service type.
+- Provide a clear picture of churn trends to aid business decisions.
+
+## 🔍 Dataset Description
+**File Used**: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
+
+| Column Name        | Description                                         |
+|--------------------|-----------------------------------------------------|
+| customerID         | Unique customer identifier                         |
+| gender             | Male/Female                                        |
+| SeniorCitizen      | 1 = Yes, 0 = No                                     |
+| Partner            | Yes/No                                             |
+| Dependents         | Yes/No                                             |
+| tenure             | Number of months the customer has stayed           |
+| PhoneService       | Yes/No                                             |
+| MultipleLines      | Yes/No/No phone service                            |
+| InternetService    | DSL/Fiber optic/No                                 |
+| OnlineSecurity     | Yes/No/No internet service                         |
+| OnlineBackup       | Yes/No/No internet service                         |
+| DeviceProtection   | Yes/No/No internet service                         |
+| TechSupport        | Yes/No/No internet service                         |
+| StreamingTV        | Yes/No/No internet service                         |
+| StreamingMovies    | Yes/No/No internet service                         |
+| Contract           | Month-to-month/One year/Two year                  |
+| PaperlessBilling   | Yes/No                                             |
+| PaymentMethod      | Payment methods used                               |
+| MonthlyCharges     | The amount charged to the customer monthly         |
+| TotalCharges       | The total amount charged to the customer           |
+| Churn              | Whether the customer churned (Yes/No)              |
+
+## 📆 Tools Used
+- **SQL (MySQL Workbench)** for data querying, cleaning, and aggregation.
+- **Tableau** for visualizing churn patterns, trends, and business insights.
+
+## 🔬 Analysis Process
+1. Import and explore the dataset using MySQL Workbench.
+2. Clean and transform key fields (e.g., convert TotalCharges to float).
+3. Write SQL queries to:
+   - Calculate overall churn rate.
+   - Segment churn by contract type, tenure, and service usage.
+   - Analyze monthly charges and payment methods.
+4. Export or connect Tableau to visualize key metrics:
+   - Churn KPIs and trend lines.
+   - Churn breakdown by tenure, gender, and contract type.
+   - Filters for demographic and service factors.
+
+## 💼 Outcomes / Insights
+- Higher churn observed in customers with month-to-month contracts.
+- Fiber optic internet users show higher churn than DSL users.
+- Short-tenure customers (<6 months) are most at risk.
+- Electronic check payment method has higher churn than credit card users.
+
+## 💻 Business Value
+This analysis empowers the telecom company to:
+- Target high-risk churn groups with retention campaigns.
+- Reconsider pricing or incentives for month-to-month contracts.
+- Improve support services for fiber optic users.
+- Monitor churn risk in real-time via Tableau dashboard.
+
+---
+
+> This project demonstrates how structured SQL analysis and visual storytelling in Tableau can uncover hidden churn drivers and guide customer retention strategy.
+
